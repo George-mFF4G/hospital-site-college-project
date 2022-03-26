@@ -1,0 +1,136 @@
+                     
+/**************** Start content **************************/
+*{
+    margin: 0;
+    padding: 0;
+/*   to take size from width not add to it */
+    box-sizing: border-box; 
+}
+body{
+    font-family: 'Open Sans', sans-serif;
+  
+}
+
+.video-view {
+  position: relative;
+   min-width: 100%;
+   min-height: 100%;
+   overflow: hidden;
+   
+}
+
+.video-view .video {
+  position: absolute;
+  background-size: cover;
+  
+  min-width: 100%;
+  min-height: 100%;
+  
+}
+
+/* #myVideo{
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+ 
+  
+}*/
+ .video-view .content{
+   /* position: absolute;*/
+    float: right;
+    background-size: cover;
+    height: 100vh;
+    width: 100vw;
+   
+}
+ .content .container-content{
+    width: 90%;
+    margin: auto;
+    margin-top:12%;
+    
+}
+.content .sections{
+
+ 
+}
+ .content .section1 ,.section2 ,.section3 ,.section4 ,.section5 ,.section6 {
+   
+   float: left;
+    width: 25.333333%;
+/*    width: 30%;*/
+    height: 200px;
+    /*margin: 40px;*/
+/*    border: solid 1px rgb(139, 0, 139);*/
+    opacity: 0.9;
+    background-size: cover;
+   border-radius: 8px;
+    background-size: cover;
+    border-radius: 30px;
+    margin: 50px 50px;
+    margin-top: 30px;
+  -webkit-transition: all 1s ease;
+     -moz-transition: all 1s ease;
+       -o-transition: all 1s ease;
+      -ms-transition: all 1s ease;
+          transition: all 1s ease;
+        
+    
+}
+
+.content .section1:hover ,.section2:hover ,.section3:hover ,.section4:hover ,.section5:hover ,.section6:hover {
+ 
+transform: scale3d(1.1,1.1,1.5);
+ transition: .2s;
+ box-shadow: 15px 15px 8px 8px rgba(2 ,5 ,41, 0.9);
+  border-radius: 45%;
+ 
+}
+.content .section1  {
+  
+    background-image: url('../images/heart3.jpg');
+  
+}
+.section1:hover{
+  
+}
+
+.content .section2{
+    background-image: url('../images/intensive-care.jpg');
+    
+}
+.content .section3{
+    background-image: url('../images/bones.jpg');
+  
+}
+.content .section4{
+    background-image: url('../images/emergency.jpg');
+    padding-bottom: 20px;
+}
+.content .section5{
+    background-image: url('../images/xray.jpg');
+    
+}
+.content .section6{
+    background-image: url('../images/lab2.jpg');
+}
+
+.content p{
+    width:180px;
+    margin: auto;
+    text-align: center;
+    cursor: pointer;
+    padding: 7px 0;
+    margin-top: -69px;
+    border-radius: 10px;
+   
+}
+
+.content .section4 p ,.section5 p ,.section6 p {
+    margin-top: -45px;
+}
+
+
+
+
+

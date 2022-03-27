@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+
+
+
 use Illuminate\Http\Request;
 // -------------------------------------------------------
 // session_start();
@@ -26,7 +29,7 @@ class AppointController extends Controller
         $password = "";
         $dbname = "hospital";
         $conn = mysqli_connect($servername, $username, $password, $dbname);
-        $sql = "DELETE FROM `appointement` WHERE `id`=$id";
+        $sql = "DELETE FROM `appointment` WHERE `id`=$id";
         mysqli_query($conn, $sql);
         echo "<center><h2>One Appointment Deleted...</h2></center>";
         // exit();
@@ -55,7 +58,7 @@ class AppointController extends Controller
 
 
 
-            $sql = "INSERT INTO `appointement` (`id`, `patient_name`, `phone`, `age`, `description`, `appointement_date`,'doc_id' ) VALUES (NULL, '$patient_name', '$phone', '$age',  '$description' , '$appointement_date','$appointement_doc_id')";
+            $sql = "INSERT INTO `appointment` (`id`, `patient_name`, `phone`, `age`, `description`, `appointement_date`,`doc_id` ) VALUES (NULL, '$patient_name', '$phone', '$age',  '$description' , '$appointement_date','$appointement_doc_id')";
 
 
             if (mysqli_query($conn, $sql)) {
@@ -65,7 +68,7 @@ class AppointController extends Controller
             }
             // header('Location: appoint-index.blade.php');
             // exit;
+            return redirect('appoint/create')->with('msg', 'New Appointment Added...');
         }
-        return redirect('appoint/create')->with('msg', 'New Appointment Added...');
     }
 }

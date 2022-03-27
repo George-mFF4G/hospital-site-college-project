@@ -43,7 +43,7 @@ Route::post('/doctors', [DoctorsController::class, 'store'])->name('doctors.stor
 Route::get('doctors/{id}/edit', [DoctorsController::class, 'edit'])->name('doctors.edit')->middleware('auth');
 Route::put('update/{id}', [DoctorsController::class, 'update'])->name('doctors.update')->middleware('auth');
 Route::delete('/doctors/{id}', [DoctorsController::class, 'destroy'])->name('doctors.destroy')->middleware('auth');
-Route::post('filter',[DoctorsController::class,'search'])->name('doctors.search')->middleware('auth');
+Route::post('filter', [DoctorsController::class, 'search'])->name('doctors.search')->middleware('auth');
 // --------------------------------------------------------------------------------------------
 
 Route::get('/patients', [ContactController::class, 'index'])->name('contacts.index')->middleware('auth');
@@ -68,5 +68,3 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('auth');
 Route::get('/register', [App\Http\Controllers\HomeController::class, 'reg'])->name('register')->middleware('auth');
 Route::post('/register', [App\Http\Controllers\HomeController::class, 'store'])->name('register.store')->middleware('auth');
-
-

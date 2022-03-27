@@ -33,34 +33,21 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
 			<label style="color:#fff; font-weight:500;">Select Date</label>
 			<input class="feedback-input" name="appointement_date" type="date" required>
 			{{-- ///////////////////////////////////////////////////////////////////////// --}}
-			<select id="specalist" name="specalist" class="form-control">
+			<select id="doc_id" name="doc_id" class="form-control feedback-input" style="color:black;">
 			<?php
                 $address_check = "SELECT * FROM doctors ";
                 $result = mysqli_query($conn, $address_check);
                 if (mysqli_num_rows($result) > 0) {
                     while ($row = mysqli_fetch_assoc($result)) { ?>
-                        <option value="<?php echo $row['specalist']; ?>"><?php echo $row['specalist']; ?></option>
+                        <option value="<?php echo $row['id']; ?>"><?php echo $row['first_name']." ".$row['last_name']." - ".$row['specalist']; ?></option>
                 <?php
                     }
                 } else {
                     echo "0 results";
                 }
                 ?>
+
 			</select>
-			<select id="doc_id" name="doc_id" class="form-control">
-			</select>
-			<script>
-				document.getElementById("specalist").onchange = changeListener;
-			
-				function changeListener() {
-					var value = this.value
-					$.post("add-doctors-suggestions.blade.php", {
-						specalist: value
-					}, function(data, status) {
-						$("#doc_id").html(data);
-					});
-				}
-			</script>
 			{{-- //////////////////////////////////////////// --}}
 			<button type="submit" class="fade" name="add_appointement">Book An Appointment</button>		  			
 		</div>  

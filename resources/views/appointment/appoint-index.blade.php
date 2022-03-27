@@ -10,9 +10,9 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
 // 
 // 
 $row = null;
-$query = "SELECT * FROM appointement";                   
+$query = "SELECT * FROM appointment";                   
 $result = mysqli_query($conn,$query);
-$row = mysqli_fetch_assoc($result)
+// $row = mysqli_fetch_assoc($result)
 ?>
 <title>Appointement</title>
 
@@ -138,6 +138,7 @@ a:hover{
                       <th scope="col">Phone</th>
                       <th scope="col">Age</th>
                       <th scope="col">Description</th>
+                      <th scope="col">Doctor Name</th>
                       <th scope="col">Date</th>
                       <th scope="col">Actions</th>
                     </tr>
@@ -154,14 +155,13 @@ a:hover{
                 <td><?php echo $row['description']; ?></td>
                 {{-- //////////////////////////////////////////////////////////////////////////// --}}
                 <?php $doc_id=$row['doc_id']; 
-                $address_doctor_first_name = "SELECT first_name FROM doctors WHERE id=$doc_id";
-                $address_doctor_last_name = "SELECT last_name FROM doctors WHERE id=$doc_id";
+                $address_doctor_first_name = "SELECT first_name,last_name FROM doctors WHERE id=$doc_id";
                 $result_doctor_first_name = mysqli_query($conn, $address_doctor_first_name);
-                $result_doctor_last_name = mysqli_query($conn, $address_doctor_last_name);
-                $row_doctor_first_name = mysqli_fetch_assoc($result_doctor_first_name)
-                $row_doctor_last_name = mysqli_fetch_assoc($result_doctor_last_name)
+                $row_doctor_first_name = mysqli_fetch_assoc($result_doctor_first_name);
                 ?>
-<td><?php echo $row_doctor_first_name['first_name']+""+$row_doctor_last_name['last_name']; ?></td>
+
+<td><?php echo $row_doctor_first_name['first_name']." ".$row_doctor_first_name['last_name'];?></td>
+
 {{-- //////////////////////////////////////////////////////////////////////////////////////////// --}}
                 <td><?php echo $row['appointement_date']; ?></td>
                 <td> 

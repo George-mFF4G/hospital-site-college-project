@@ -1,20 +1,7 @@
 @extends('layout')
 @section('content')
 
-<?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "hospital";
-$conn = mysqli_connect($servername, $username, $password, $dbname);
-// 
-// 
-$row = null;
-$query = "SELECT * FROM appointement";                   
-$result = mysqli_query($conn,$query);
-// $row = mysqli_fetch_assoc($result)
-?>
-<title>Appointement</title>
+<title>Vaccaine</title>
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Varela+Round">
 <!-- Bootstrap -->
@@ -91,6 +78,9 @@ a:hover{
   color: #fff;
   font-weight: bold;
 }
+.table td, .table th {
+  vertical-align: inherit;
+}
   </style>    
     <center>
       @if(Session::has('msg')) 
@@ -110,9 +100,9 @@ a:hover{
             <div class="card">
                 <div class="card-header card-title">
                   <div class="d-flex align-items-center">
-                    <h2 class="mb-0">Appointements</h2>
+                    <h2 class="mb-0">vaccaines</h2>
                     <div class="ml-auto">
-                      <a href="{{Route('appoint.create')}}" class="btn btn-success"><i class="fa fa-plus-circle"></i> Add New</a>
+                      <a href="{{Route('vaccaine.add')}}" class="btn btn-success"><i class="fa fa-plus-circle"></i> Add New</a>
                     </div>
                   </div>
                 </div>
@@ -138,57 +128,50 @@ a:hover{
                       <th scope="col">Phone</th>
                       <th scope="col">Age</th>
                       <th scope="col">Description</th>
-                      <th scope="col">Doctor Name</th>
                       <th scope="col">Date</th>
                       <th scope="col">Actions</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <?php
-                    if (mysqli_num_rows($result) > 0) {$count=1;
-                    while ($row = mysqli_fetch_assoc($result)) { ?>
-                <tr>
-                <td><?php echo $count++; ?></td>
-                <td><?php echo $row['patient_name']; ?></td>
-                <td><?php echo $row['phone']; ?></td>
-                <td><?php echo $row['age']; ?></td>
-                <td><?php echo $row['description']; ?></td>
-                {{-- //////////////////////////////////////////////////////////////////////////// --}}
-                <?php $doc_id=$row['doc_id']; 
-                $address_doctor_first_name = "SELECT first_name,last_name FROM doctors WHERE id=$doc_id";
-                $result_doctor_first_name = mysqli_query($conn, $address_doctor_first_name);
-                $row_doctor_first_name = mysqli_fetch_assoc($result_doctor_first_name);
-                ?>
-
-<td><?php echo $row_doctor_first_name['first_name']." ".$row_doctor_first_name['last_name'];?></td>
-
-{{-- //////////////////////////////////////////////////////////////////////////////////////////// --}}
-                <td><?php echo $row['appointement_date']; ?></td>
-                <td> 
-                  <form style="margin:auto" method="post" action="{{ Route('appoint.delete',$row['id']) }}" class='confirm'>
-                    @csrf
-                    @method('DELETE')
-                    <button class="btn btn-outline-danger" type="submit" style="width: 95px;">Delete</button>
-                  </form>
-                </td>
-                        
-            </tr><?php }}?>
+                    @forelse ($data as $doc)
+                    <tr>
+                      <th scope="row">{{$loop->iteration}}</th>
+                      <td>{{$doc['patient_name']}}</td>
+                      <td>{{$doc['phone']}}</td>
+                      <td>{{$doc['age']}}</td>
+                      <td>{{$doc['description']}}</td>
+                      <td>{{$doc['appoint_date']}}</td>
+                      <td width="150"> 
+                        {{-- <a href="show.html" class="btn btn-sm btn-circle btn-outline-info" title="Show"><i class="fa fa-eye"></i></a> --}}
+                        {{-- @if($doc['confirmed']==1) --}}
+                            {{-- <a href="{{ Route('vaccaine.edit',$doc['id']) }}" class="btn btn-sm btn-circle btn-outline-secondary" title="Edit" style="margin-left: 10px;" hidden><i class="fa fa-edit"></i></a> --}}
+                        {{-- @else     --}}
+                            <a href="{{ Route('vaccaine.edit',$doc['id']) }}" class="btn btn-sm btn-circle btn-outline-secondary" title="Edit" style="margin-left: 10px;"><i class="fa fa-edit"></i></a>
+                        {{-- @endif --}}
+                        <form method="post" action="{{ Route('vaccaine.destroy',$doc['id']) }}" class="confirm" style="display: inline-block; margin:0px;">
+                          @csrf
+                          @method('DELETE')
+                          <button style="color: red;" class="btn btn-sm btn-circle btn-outline-danger" title="Delete" onclick="confirm('Are you sure?') type="submit"><i class="fa fa-times"></i></button>
+                        </form>
+                        <form method="post" action="{{ Route('vaccaine.confirm',$doc['id']) }}" style="display: flex; margin:5px 0px 0px 0px;">
+                          @csrf
+                          @method('PUT')
+                          <button class="btn btn-warning" type="submit" style="padding: 0px; border:0px; width: 80px;">Tooken</button>
+                            @if($doc['confirmed']==1)
+                            <input class="feedback-input" name="confirm" type="checkbox" value="1" style="display: inline-block; width:20px;" checked>
+                            @else
+                            <input class="feedback-input" name="confirm" type="checkbox" value="1" style="display: inline-block; width:20px;">
+                            @endif
+                        </form>
+                        {{-- <a href="{{ Route('doctors.destroy',$doc['id']) }}" class="btn btn-sm btn-circle btn-outline-danger" title="Delete" onclick="confirm('Are you sure?')"><i class="fa fa-times"></i></a> --}}
+                      </td>
+                    </tr>
+                    @empty
+                        <td colspan="8" style="text-align: center; font-size: 30px; font-weight: bold;">No Data</td>
+                @endforelse
 
                 </table> 
-
-                {{-- <nav class="mt-4">
-                    <ul class="pagination justify-content-center">
-                      <li class="page-item disabled">
-                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-                      </li>
-                      <li class="page-item"><a class="page-link" href="#">1</a></li>
-                      <li class="page-item"><a class="page-link" href="#">2</a></li>
-                      <li class="page-item"><a class="page-link" href="#">3</a></li>
-                      <li class="page-item">
-                        <a class="page-link" href="#">Next</a>
-                      </li>
-                    </ul>
-                  </nav> --}}
+                {{$data->links()}}
               </div>
             </div>
           </div>

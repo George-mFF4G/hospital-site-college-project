@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('age');
             $table->string('description');
             $table->date('appoint_date');
-            $table->boolean('confirmed');
+            $table->boolean('confirmed')->nullable();
             $table->timestamps();
         });
     }

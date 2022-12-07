@@ -29,7 +29,7 @@ class AppointController extends Controller
         $password = "";
         $dbname = "hospital";
         $conn = mysqli_connect($servername, $username, $password, $dbname);
-        $sql = "DELETE FROM `appointment` WHERE `id`=$id";
+        $sql = "DELETE FROM `appointement` WHERE `id`=$id";
         mysqli_query($conn, $sql);
         echo "<center><h2>One Appointment Deleted...</h2></center>";
         // exit();
@@ -58,7 +58,7 @@ class AppointController extends Controller
 
 
 
-            $sql = "INSERT INTO `appointment` (`id`, `patient_name`, `phone`, `age`, `description`, `appointement_date`,`doc_id` ) VALUES (NULL, '$patient_name', '$phone', '$age',  '$description' , '$appointement_date','$appointement_doc_id')";
+            $sql = "INSERT INTO `appointement` (`id`, `patient_name`, `phone`, `age`, `description`, `appointement_date`,`doc_id` ) VALUES (NULL, '$patient_name', '$phone', '$age',  '$description' , '$appointement_date','$appointement_doc_id')";
 
 
             if (mysqli_query($conn, $sql)) {

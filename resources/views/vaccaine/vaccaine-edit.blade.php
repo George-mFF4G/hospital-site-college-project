@@ -5,8 +5,10 @@
   <div class="right">
       <nav class="navMenu">
         <a href="{{url('http://127.0.0.1:8000/')}}">Home</a>
+        @auth
         <a href="{{url('http://127.0.0.1:8000/patients')}}">Our Patients</a>
         <a href="{{Route('doctors.index')}}">Our Doctors</a>
+        @endauth
         <a href="{{url('http://127.0.0.1:8000/appoint')}}">Appointment Booking</a>
         <a href="{{url('http://127.0.0.1:8000/vaccaine')}}">Vaccaine</a>
         <a href="{{url('http://127.0.0.1:8000/covid')}}">Covid 19</a>
@@ -17,21 +19,16 @@
 
 
 <div class="container">
-    <form method="POST" action="{{ Route('doctors.update',[$data->id]) }}">      
+    <form method="POST" action="{{ Route('vaccaine.update',[$data->id]) }}"">      
       @csrf
       @method('PUT')
       <div class="title">
           <i class="fas fa-pencil-alt"></i>
-          <h2>Update Doctor Information</h2>
+          <h2>Update Vaccaine Information</h2>
       </div>
       <div>
-
-        <input class="feedback-input" type="text" name="first_name" placeholder="First Name" value="{{$data->first_name}}">
-        @error('first_name')
-        <div class="alert alert-danger">{{$message}}</div>
-        @enderror
-        <input type="text" name="last_name" class="feedback-input" placeholder="Last Name" value="{{$data->last_name}}">
-        @error('last_name')
+        <input class="feedback-input" type="text" name="patient_name" placeholder="Patient Name" value="{{$data->patient_name}}">
+        @error('patient_name')
         <div class="alert alert-danger">{{$message}}</div>
         @enderror
         <input type="text" name="phone" class="feedback-input" placeholder="Phone" value="{{$data->phone}}">
@@ -42,28 +39,21 @@
         @error('age')
         <div class="alert alert-danger">{{$message}}</div>
         @enderror
-        <select name="specialist" class="feedback-input">
-            <option value="">Select Department</option>
-            <option value="Thoracic and open heart surgery" {{($data->specalist=='Thoracic and open heart surgery')? 'selected' :''}}>Thoracic and open heart surgery</option>
-            <option value="Emergencies and operations" {{($data->specalist=='Emergencies and operations')? 'selected' :''}}>Emergencies and operations</option>
-            <option value="Laboratories and analyzes" {{($data->specalist=='Laboratories and analyzes')? 'selected' :''}}>Laboratories and analyzes</option>
-            <option value="Intensive care" {{($data->specalist=='Intensive care')? 'selected' :''}}>Intensive care</option>
-            <option value="x_ray place" {{($data->specalist=='x_ray place')? 'selected' :''}}>x_ray place</option>
-            <option value="Bones" {{($data->specalist=='Bones')? 'selected' :''}}>Bones</option>
-        </select>
-        @error('specialist')
+        <input type="text" name="description" class="feedback-input" placeholder="Description" value="{{$data->description}}">
+        @error('description')
         <div class="alert alert-danger">{{$message}}</div>
         @enderror
-        <input type="text" name="address" class="feedback-input" placeholder="Address" value="{{$data->address}}">
-        @error('address')
-        <div class="alert alert-danger">{{$message}}</div>
-        @enderror
-        <input type="submit" name="submit" value="Update New Doctor">
+        <label style="color:#fff; font-weight:500;">Select Date</label>
+			      <input class="feedback-input" name="appoint_date" type="date" value="{{$data->appoint_date}}">
+            @error('appoint_date')
+            <div class="alert alert-danger">{{$message}}</div>
+            @enderror
+        <input type="submit" name="submit" value="Update New vaccaine">
     </div>  
     </form>
   </div>
   
-  <style>
+<style>
     @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap");
     body{
       margin: 0;
@@ -112,7 +102,7 @@
     }
     
     /* ----------------------- */
-  @import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
+    @import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
   
   .container{ 
       background:rgb(30,30,40); 
@@ -182,5 +172,5 @@
   option{
       background: rgba(30, 30, 40, 0.7);
   }
-  
-  </style>
+    
+</style>

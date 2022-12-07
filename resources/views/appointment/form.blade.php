@@ -33,7 +33,7 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
 			<label style="color:#fff; font-weight:500;">Select Date</label>
 			<input class="feedback-input" name="appointement_date" type="date" required>
 			{{-- ///////////////////////////////////////////////////////////////////////// --}}
-			<select id="doc_id" name="doc_id" class="form-control feedback-input" style="color:black;">
+			<select id="doc_id" name="doc_id" class="form-control feedback-input" style="color:white; background-color:#0000008c;">
 			<?php
                 $address_check = "SELECT * FROM doctors ";
                 $result = mysqli_query($conn, $address_check);

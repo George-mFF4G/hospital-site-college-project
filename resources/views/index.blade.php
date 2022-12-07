@@ -26,7 +26,7 @@
                                 Provide High Solutions.
                             </p>
                             <input  type="button" onclick="location.href='{{url('https://daralshefa.com/medical-advices/')}}'" class="btn button-start hover-opacity" value="Take care of yourself" style="background-color: #327616">
-                            <input  type="button" onclick="location.href='{{route('appoint.create')}}'" class="btn button-start hover-opacity" value="Book your vaccination">
+                            <input  type="button" onclick="location.href='{{route('vaccaine.add')}}'" class="btn button-start hover-opacity" value="Book your vaccination">
                             {{-- @auth
                             <input  type="button" onclick="location.href='{{route('register')}}'" class="btn button-start hover-opacity" value="Add New User" style="background-color: #327616">
                             @endauth --}}

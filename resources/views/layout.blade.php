@@ -133,6 +133,7 @@
                             @else
                             <a href="{{route('appoint.index')}}">Appointment Booking</a>
                             @endguest
+                            <a href="{{url('http://127.0.0.1:8000/vaccaine')}}">Vaccaine</a>
                             <a href="{{url('http://127.0.0.1:8000/team')}}">About Us</a>
                             <a href="{{url('http://127.0.0.1:8000/covid')}}">Covid 19</a>
                             {{-- <div class="dot"></div> --}}
